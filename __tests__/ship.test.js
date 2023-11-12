@@ -15,12 +15,20 @@ describe("ship object", ()=>{
         const ship = new Ship(itin)
         expect(ship.currentPort).toEqual(dover)
     })
+
+    test("ship gets added to port on instantiation", ()=>{
+        const dover = new Port("Dover")
+        const itin = new Itinerary([dover])
+        const ship = new Ship(itin)
+        expect(dover.ships).toContain(ship)
+    })
 })
 
 describe("a ship can set sail away from a starting port", ()=>{
     test("ship is not at a port once it has setsail", ()=>{
         const dover = new Port("Dover")
-        const itin = new Itinerary([dover])
+        const calais = new Port("Calais")
+        const itin = new Itinerary([dover, calais])
         const ship = new Ship(itin)        
         ship.setSail()
         expect(ship.currentPort).toBe(null)
