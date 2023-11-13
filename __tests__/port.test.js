@@ -1,18 +1,22 @@
 const Port = require("../src/port");
 
-describe("port can be instantiated", () => {
-  test("when instantiated port returns an object", () => {
-    expect(new Port()).toBeInstanceOf(Object);
-  });
+describe("port", () => {
+  describe("port is instantiated", () => {
+    let port;
+    beforeEach(() => {
+      port = new Port("Dover");
+    });
+    test("when instantiated port returns an object", () => {
+      expect(port).toBeInstanceOf(Object);
+    });
 
-  test("port has a name property", () => {
-    const port = new Port("Dover");
-    expect(port.name).toBe("Dover");
-  });
+    test("port has a name property", () => {
+      expect(port.name).toBe("Dover");
+    });
 
-  test("port has a ships property", () => {
-    const port = new Port("Dover");
-    expect(port.ships).toEqual([]);
+    test("port has a ships property", () => {
+      expect(port.ships).toEqual([]);
+    });
   });
 });
 
@@ -26,8 +30,8 @@ describe("adding and removing ships to port", () => {
     expect(port.ships).toEqual([qmary, titan]);
   });
 
-  test("removeShip removes ship from ships property", ()=>{
-    port.removeShip(qmary)
-    expect(port.ships).toEqual([titan])
-  })
+  test("removeShip removes ship from ships property", () => {
+    port.removeShip(qmary);
+    expect(port.ships).toEqual([titan]);
+  });
 });

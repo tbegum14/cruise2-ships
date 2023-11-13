@@ -1,48 +1,40 @@
-const Ship = require("../src/ship")
-const Port = require("../src/port")
-const Itinerary = require("../src/itinerary")
+const Ship = require("../src/ship");
+const Port = require("../src/port");
+const Itinerary = require("../src/itinerary");
 
-describe("ship object", ()=>{
-    test("ship can be instantiated and returns an object", ()=>{
-        const dover = new Port("Dover")
-        const itin = new Itinerary([dover])
-        expect(new Ship(itin)).toBeInstanceOf(Object) 
-    })
+describe("ship object", () => {
+  describe("has ports and an itinerary", () => {
+    let dover;
+    let calais;
+    let itin;
+    let ship;
+    beforeEach(() => {
+      dover = new Port("Dover");
+      calais = new Port("Calais");
+      itin = new Itinerary([dover, calais]);
+      ship = new Ship(itin);
+    });
+    test("ship can be instantiated and returns an object", () => {
+      expect(new Ship(itin)).toBeInstanceOf(Object);
+    });
 
-    test("ship has a property of starting port which returns a port object", ()=>{
-        const dover = new Port("Dover")
-        const itin = new Itinerary([dover])
-        const ship = new Ship(itin)
-        expect(ship.currentPort).toEqual(dover)
-    })
+    test("ship has a property of starting port which returns a port object", () => {
+      expect(ship.currentPort).toEqual(dover);
+    });
 
-    test("ship gets added to port on instantiation", ()=>{
-        const dover = new Port("Dover")
-        const itin = new Itinerary([dover])
-        const ship = new Ship(itin)
-        expect(dover.ships).toContain(ship)
-    })
-})
+    test("ship gets added to port on instantiation", () => {
+      expect(dover.ships).toContain(ship);
+    });
 
-describe("a ship can set sail away from a starting port", ()=>{
-    test("ship is not at a port once it has setsail", ()=>{
-        const dover = new Port("Dover")
-        const calais = new Port("Calais")
-        const itin = new Itinerary([dover, calais])
-        const ship = new Ship(itin)        
-        ship.setSail()
-        expect(ship.currentPort).toBe(null)
-    })
-})
+    test("ship is not at a port once it has setsail", () => {
+      ship.setSail();
+      expect(ship.currentPort).toBe(null);
+    });
 
-describe("a ship can dock at a different port to its starting port", ()=>{
-    test("ships current port is different to when it was instantiated", ()=>{
-        const dover = new Port("Dover")
-        const calais = new Port("Calais")
-        const itin = new Itinerary([dover, calais])
-        const ship = new Ship(itin)
-        ship.setSail()
-        ship.dock()
-        expect(ship.currentPort).toEqual(calais)
-    })
-})
+    test("ships current port is different to when it was instantiated", () => {
+      ship.setSail();
+      ship.dock();
+      expect(ship.currentPort).toEqual(calais);
+    });
+  });
+});
