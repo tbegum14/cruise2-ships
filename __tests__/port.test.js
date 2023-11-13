@@ -22,8 +22,8 @@ describe("port", () => {
 
 describe("adding and removing ships to port", () => {
   const port = new Port("Dover");
-  const qmary = {};
-  const titan = {};
+  const qmary = jest.fn();
+  const titan = jest.fn();
   port.addShip(qmary);
   port.addShip(titan);
   test("addShip adds a ship to port ships property", () => {

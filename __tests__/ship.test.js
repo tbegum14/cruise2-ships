@@ -9,8 +9,18 @@ describe("ship object", () => {
     let itin;
     let ship;
     beforeEach(() => {
-      dover = new Port("Dover");
-      calais = new Port("Calais");
+      dover = {
+        name: "Dover",
+        ships: [],
+        addShip: jest.fn(),
+        removeShip: jest.fn()
+      }
+      calais = {
+        name: "Calais",
+        ships: [],
+        addShip: jest.fn(),
+        removeShip: jest.fn()
+      }
       itin = new Itinerary([dover, calais]);
       ship = new Ship(itin);
     });
@@ -23,18 +33,19 @@ describe("ship object", () => {
     });
 
     test("ship gets added to port on instantiation", () => {
-      expect(dover.ships).toContain(ship);
+      expect(dover.addShip).toHaveBeenCalledWith(ship);
     });
 
-    test("ship is not at a port once it has setsail", () => {
+    test("ship can set sail", () => {
       ship.setSail();
-      expect(ship.currentPort).toBe(null);
+      expect(ship.currentPort).toBeFalsy();
+      expect(dover.removeShip).toHaveBeenCalledWith(ship)
     });
 
     test("ships current port is different to when it was instantiated", () => {
       ship.setSail();
       ship.dock();
-      expect(ship.currentPort).toEqual(calais);
+      expect(calais.addShip).toHaveBeenCalledWith(ship);
     });
   });
 });
