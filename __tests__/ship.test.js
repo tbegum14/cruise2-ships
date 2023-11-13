@@ -21,7 +21,7 @@ describe("ship object", () => {
         addShip: jest.fn(),
         removeShip: jest.fn()
       }
-      itin = new Itinerary([dover, calais]);
+      itin = {ports: [dover, calais]}
       ship = new Ship(itin);
     });
     test("ship can be instantiated and returns an object", () => {
@@ -42,7 +42,7 @@ describe("ship object", () => {
       expect(dover.removeShip).toHaveBeenCalledWith(ship)
     });
 
-    test("ships current port is different to when it was instantiated", () => {
+    test("ships can dock at a different port", () => {
       ship.setSail();
       ship.dock();
       expect(calais.addShip).toHaveBeenCalledWith(ship);
