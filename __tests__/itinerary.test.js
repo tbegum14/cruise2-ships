@@ -10,8 +10,8 @@ describe("itinerary object", () => {
     let ship;
 
     beforeEach(() => {
-      dover = new Port("Dover");
-      calais = new Port("Calais");
+      dover = {name: "Dover", ships: [], addShip: jest.fn(), removeShip: jest.fn()}
+      calais = {name: "Calais", ships: [], addShip: jest.fn(), removeShip: jest.fn()}
       itin = new Itinerary([dover, calais]);
       ship = new Ship(itin);
     });
