@@ -10,10 +10,6 @@ Ship is initialised with the current port in itinerary as its current port, it c
 
 Port has a name and can hold a ship. It has a method to add and remove ships which is done via Ship.js
 
-The GUI displays a message as you begin and move from port to port and a display letting you know where you are.
-
-The form can take input and add a port to the itinerary.
-
 TDD used to develop programme
 
 Test files include dummies, stubs and spies 
